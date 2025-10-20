@@ -652,9 +652,12 @@ namespace ccxc_backend.Controllers.Users
                 var firstSession = userSessions[0];
                 var firstSessionKey = cache.GetUserSessionKey(firstSession);
                 var firstSessionItem = await cache.Get<UserSession>(firstSessionKey);
-                firstSessionItem.is_active = 0;
-                firstSessionItem.inactive_message = $"您的账号已于{DateTime.Now:yyyy-MM-dd HH:mm}在另一地点登录，超过最大登录数量限制。";
-                await cache.Put(firstSessionKey, firstSessionItem, Config.SystemConfigLoader.Config.UserSessionTimeout * 1000);
+                if (firstSessionItem != null)
+                {
+                    firstSessionItem.is_active = 0;
+                    firstSessionItem.inactive_message = $"您的账号已于{DateTime.Now:yyyy-MM-dd HH:mm}在另一地点登录，超过最大登录数量限制。";
+                    await cache.Put(firstSessionKey, firstSessionItem, Config.SystemConfigLoader.Config.UserSessionTimeout * 1000);
+                }
 
                 userSessions.RemoveAt(0);
             }

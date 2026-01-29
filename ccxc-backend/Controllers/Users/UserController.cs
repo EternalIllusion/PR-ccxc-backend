@@ -46,6 +46,8 @@ namespace ccxc_backend.Controllers.Users
                 await response.BadRequest("验证码错误");
                 return;
             }
+            
+            await cache.Delete(cKey); //验证码只允许单次使用
 
             if (code.ToLower() != requestJson.code.ToLower())
             {
@@ -262,6 +264,8 @@ namespace ccxc_backend.Controllers.Users
                 await response.BadRequest("验证码错误");
                 return;
             }
+            
+            await cache.Delete(cKey); //验证码只允许单次使用
 
             if (code.ToLower() != requestJson.code.ToLower())
             {
@@ -549,6 +553,8 @@ namespace ccxc_backend.Controllers.Users
                 await response.BadRequest("验证码错误");
                 return;
             }
+            
+            await cache.Delete(cKey); //验证码只允许单次使用
 
             if (code.ToLower() != requestJson.code.ToLower())
             {
@@ -726,6 +732,8 @@ namespace ccxc_backend.Controllers.Users
                 await response.BadRequest("验证码错误");
                 return;
             }
+            
+            await cache.Delete(cKey); //验证码只允许单次使用
 
             if (code.ToLower() != requestJson.code.ToLower())
             {
